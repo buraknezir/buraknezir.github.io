@@ -1,0 +1,45 @@
+.img-container
+{
+    float: left;
+    width: 30%;
+    padding: 5px;
+    padding-left: 0px;
+    padding-right: 10px;
+}
+
+.clearfix::after
+{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.title
+{
+    margin-bottom: 0px;
+}
+
+.info
+{
+    font-size: 25px; 
+    margin-bottom: 0px;
+}
+
+.vertical
+{
+    height: 70%;
+}
+
+.horizontal
+{
+    width: 80%;
+}
+
+hr
+{
+    width: 640px;
+    height: 5px;
+    margin-left: 0px;
+    margin-top: 20px;
+    background-color: #526980;
+}
