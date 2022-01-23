@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+
+body {
+    font-family: "Montserrat";
+    background-color: #151515;
+}
+
+.eleven_one-text {
+    color: #0095ff;
+    font-weight: 600;
+    font-size: 4em;
+}
+
+.eleven_two-text {
+    color: #0095ff;
+    font-weight: 400;
+    font-size: 1.8em;
+    opacity: 80%
+}
+
+.eleven_three-text {
+    color: #0095ff;
+    font-weight: 400;
+    font-size: 1.8em;
+    opacity: 70%
+}
+
+.eleven_four-buttons {
+    background-color: #0095ff;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.eleven_four-buttons:hover {
+    background-color: #0095ff;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    opacity: 90%;
+}
+
+.eleven_five-display-block {
+    display: block;
+}
+
+@media only screen and (min-width: 768px) {
+    .eleven_six-buttons-mr {
+        margin-right: 1.5%;
+    }
+}
