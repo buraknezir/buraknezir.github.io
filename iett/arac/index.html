@@ -7,9 +7,15 @@
 	<title>İETT | Araç</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
 	<script>
         var JSON_data;
-        $.getJSON('https://iett-api.buraknezir.repl.co/FiloAracKonum.json', function(data) {
+        $.getJSON('https://iett-api.buraknezir.repl.co/FiloAracKonum', function(data) {
             JSON_data = data;
         });;
 
@@ -18,13 +24,17 @@
             var i = 0;
             for (var key in JSON_data) {
                 if (JSON_data[key].KapiNo == kapiNo) {
-                    document.getElementById("businfo").innerHTML = "<h2>"
-                        + "Kapı Kodu: " + JSON_data[key].KapiNo + "<br>"
-                        + "Operatör: " + JSON_data[key].Operator + "<br>"
-                        + "Garaj: " + JSON_data[key].Garaj + "<br>"
-                        + "Son Sinyal: " + JSON_data[key].Saat + "<br>"
-                        + "Plaka: " + JSON_data[key].Plaka + "<br>"
-                        + "Enlem-Boylam: " + JSON_data[key].Enlem + JSON_data[key].Boylam + "<br>" + "</h2>"
+                    document.getElementById("businfo").innerHTML = "<p style='font-size: 1.5em; color: white;'>"
+                        + "<b>Kapı Kodu:</b> " + JSON_data[key].KapiNo + "<br>"
+                        + "<b>Operatör:</b> " + JSON_data[key].Operator + "<br>"
+                        + "<b>Garaj:</b> " + JSON_data[key].Garaj + "<br>"
+                        + "<b>Son Sinyal:</b> " + JSON_data[key].Saat + "<br>"
+                        + "<b>Plaka:</b> " + JSON_data[key].Plaka + "<br>"
+                        + "<b>Enlem-Boylam:</b> " + JSON_data[key].Enlem + ", " + JSON_data[key].Boylam + "<br>" + "</p>";
+                    document.getElementById("map").hidden = false;
+                    map.flyTo([JSON_data[key].Enlem, JSON_data[key].Boylam], 13);
+                    markers.clearLayers();
+                    L.marker([JSON_data[key].Enlem, JSON_data[key].Boylam]).addTo(markers);
                     i++;
                 }
             }
@@ -36,6 +46,7 @@
 
         function onChangeInput() {
             document.getElementById("businfo").innerHTML = "<h2>Kapı kodu girin</h2>"
+            document.getElementById("map").hidden = true;
         }
     </script>
 	<style>
@@ -64,5 +75,18 @@
 	<div id="businfo">
 		<h2>Kapı kodu girin</h2>
 	</div>
+    <div id='map' style="height: 240px; width: 100%;"></div>
+    
+    <script>
+        var map = L.map('map').setView([41, 29], 10);
+
+        L.tileLayer('https://tile.jawg.io/jawg-streets/{z}/{x}/{y}{r}.png?access-token=hv9cfKFnPQVf6xuQr4svkfROUSgEJfdXsbx5jUZKX4kFD5OnFWtIwiufct3Yq8js', {
+            attribution: 'Made with ❤️ by <b>BuraK</b>',
+            maxZoom: 18
+        }).addTo(map);
+        
+        var markers = L.layerGroup().addTo(map);
+        document.getElementById("map").hidden = true;
+    </script>
 </body>
 </html>
