@@ -40,7 +40,11 @@
         $.getJSON('https://iett-api.buraknezir.repl.co/Garaj', function(data) {
             JSON_data = data;
             for (var key in JSON_data) {
-                L.marker([JSON_data[key].KOORDINAT]).bindPopup(JSON_data[key].ID + " - " + JSON_data[key].GARAJ_KODU + "<br>" + JSON_data[key].GARAJ_ADI).addTo(markerGroup);
+                const point = JSON_data[key].KOORDINAT;
+                const [x, y] = point.match(/\(([^\s]+),\s([^\s]+)\)/).slice(1);
+                
+                var latLng = L.latLng([x, y]);
+                L.marker(latLng).bindPopup(JSON_data[key].ID + " - " + JSON_data[key].GARAJ_KODU + "<br>" + JSON_data[key].GARAJ_ADI).addTo(markerGroup);
             }
             document.getElementById("garajCount").innerText = JSON_data.length;
         });
