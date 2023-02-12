@@ -19,7 +19,7 @@
 	<p>İETT sistemindeki İETT, ÖHO, OAŞ garajlarının harita üzerinde gösterimi
     <br>
     <br>
-	<i>Garaj Sayısı: <b>81</b></i>
+	<i>Garaj Sayısı: <b id='garajCount'>81</b></i>
     <br>
 	<i>Son Güncelleme: <b>12.02</b>.2023</i>
 	<br>
@@ -40,9 +40,10 @@
         $.getJSON('https://iett-api.buraknezir.repl.co/Garaj', function(data) {
             JSON_data = data;
             for (var key in JSON_data) {
-                var latLng = L.latLng([JSON_data[key].Enlem, JSON_data[key].Boylam]);
-                L.marker(latLng).bindPopup(JSON_data[key].Id + " - " + JSON_data[key].GarajKodu + "<br>" + JSON_data[key].GarajAdi).addTo(markerGroup);
+                var latLng = L.latLng(JSON_data[key].KOORDINAT);
+                L.marker(latLng).bindPopup(JSON_data[key].ID + " - " + JSON_data[key].GARAJ_KODU + "<br>" + JSON_data[key].GARAJ_ADI).addTo(markerGroup);
             }
+            document.getElementById("garajCount").innerText = JSON_data.length;
         });
     </script>
 </body>
