@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>İETT | Araç</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
@@ -15,9 +14,9 @@
         crossorigin=""></script>
 	<script>
         var JSON_data;
-        $.getJSON('https://iett-api.buraknezir.repl.co/FiloAracKonum', function(data) {
-            JSON_data = data;
-        });;
+	fetch("'https://iett-api.buraknezir.repl.co/FiloAracKonum")
+  	    .then((response) => response.json())
+  	    .then((data) => JSON_data = data);
 
         function updateBusNumber() {
             kapiNo = document.getElementById("kapinoinput").value;
@@ -30,7 +29,7 @@
                         + "<b>Garaj:</b> " + JSON_data[key].Garaj + "<br>"
                         + "<b>Son Sinyal:</b> " + JSON_data[key].Saat + "<br>"
                         + "<b>Plaka:</b> " + JSON_data[key].Plaka + "<br>"
-                        + "<b>Enlem-Boylam:</b> " + JSON_data[key].Enlem + ", " + JSON_data[key].Boylam + "<br>" + "</p>";
+                        + "<b>Enlem-Boylam:</b> " + JSON_data[key].Enlem.toFixed(6) + ", " + JSON_data[key].Boylam.toFixed(6) + "<br>" + "</p>";
                     document.getElementById("map").hidden = false;
                     map.flyTo([JSON_data[key].Enlem, JSON_data[key].Boylam], 13);
                     markers.clearLayers();
