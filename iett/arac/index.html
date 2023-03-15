@@ -18,6 +18,8 @@
   	    .then((response) => response.json())
   	    .then((data) => JSON_data = JSON.stringify(data));
 
+	JSON_data = JSON.parse(JSON_data);
+
         function updateBusNumber() {
             kapiNo = document.getElementById("kapinoinput").value;
             var i = 0;
