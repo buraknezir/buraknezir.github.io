@@ -16,7 +16,7 @@
         var JSON_data;
 	fetch("https://iett-api.buraknezir.repl.co/FiloAracKonum")
   	    .then((response) => response.json())
-  	    .then((data) => JSON_data = JSON.parse(data));
+  	    .then((data) => JSON_data = JSON.stringify(data));
 
         function updateBusNumber() {
             kapiNo = document.getElementById("kapinoinput").value;
