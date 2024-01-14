@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 	<meta charset="UTF-8">
-	<meta name="description" content="İETT filosundaki araçların kapı kodlarına göre garaj, operatör, plaka, konum ve son sinyal bilgileri">
+	<meta name="description" content="İETT filosundaki araçların kapı kodlarına göre garaj, operatör, hız, plaka, marka, konum ve son sinyal bilgileri">
 	<meta name="keywords" content="İETT, Otobüs, Araç İETT, Bus">
 	<meta name="author" content="BuraK">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,18 +23,38 @@
             .then((data) => {
                 JSON_data = data;
             });
+        var busData;
+        fetch("https://iett-api.buraknezir.repl.co/AracMarka")
+            .then((response) => response.json())
+            .then((data) => {
+                busData = data;
+            });
+
         function updateBusNumber() {
             kapiNo = document.getElementById("kapinoinput").value;
             var i = 0;
+            var j = 0;
+
             for (var key in JSON_data) {
                 if ((isNaN(kapiNo.charAt(0)) && JSON_data[key].KapiNo == kapiNo) || (!isNaN(kapiNo.charAt(0)) && JSON_data[key].Plaka == kapiNo)) {
+                    var marka = "";
+
+                    for (var keys in busData) {
+                        if (JSON_data[key].KapiNo == busData[keys].KapiNo) {
+                            marka = busData[keys].Marka;
+                            j++;
+                        }
+                    }
+
                     document.getElementById("businfo").innerHTML = "<p style='font-size: 1.5em;'>"
                         + "<b>Kapı Kodu:</b> " + JSON_data[key].KapiNo + "<br>"
                         + "<b>Operatör:</b> " + JSON_data[key].Operator + "<br>"
                         + "<b>Garaj:</b> " + JSON_data[key].Garaj + "<br>"
                         + "<b>Son Sinyal:</b> " + JSON_data[key].Saat + "<br>"
+                        + "<b>Hız:</b> " + JSON_data[key].Hiz + "km/sa<br>"
                         + "<b>Plaka:</b> " + JSON_data[key].Plaka + "<br>"
-                        + "<b>Enlem-Boylam:</b> " + JSON_data[key].Enlem + ", " + JSON_data[key].Boylam + "<br>" + "</p>";
+                        + "<b>Marka:</b> " + marka + "<br>"
+                        + "<b>Enlem-Boylam:</b> " + JSON_data[key].Enlem + ", " + JSON_data[key].Boylam + "<br>";
                     document.getElementById("map").hidden = false;
                     map.flyTo([JSON_data[key].Enlem, JSON_data[key].Boylam], 13);
                     markers.clearLayers();
@@ -62,14 +82,16 @@
 </head>
 <body>
 	<h1>İETT Araç</h1>
-	<p>İETT filosundaki araçların kapı kodlarına veya plakalarına göre garaj, operatör, plaka, konum ve son sinyal bilgileri
+	<p>İETT filosundaki araçların kapı kodlarına veya plakalarına göre garaj, operatör, hız, plaka, marka, konum ve son sinyal bilgileri
     <br>
     <br>
-	<i><b>ÖHO</b> ve <b>OAŞ</b> araçlarının garajları <b>"null"</b> olarak gözükmektedir.</i>
+	<i><b>ÖHO</b> ve <b>UAŞ</b> araçlarının garajları <b>"null"</b> olarak gözükmektedir.</i>
     <br>
 	<i><b>Sultangazi Garajı</b>'na bağlı araçların garajları <b>"null"</b> olarak gözükmektedir.</i>
     <br>
 	<i><b>Adalar</b>'daki araçların garajları <b>"null"</b> olarak gözükmektedir.</i>
+	<br>
+	<i>Son <b>marka</b> güncelleme tarihi <b>10.09.2023</b>'tür.</i>
 	<br>
 	<div id="kapinoinputdiv" style="display: flex;">
 		<input type="text" id="kapinoinput" onkeyup="onChangeInput(); this.value = this.value.toUpperCase();" placeholder="Kapı Kodu veya Plaka (örn: O1001 / 34TP5291)">
