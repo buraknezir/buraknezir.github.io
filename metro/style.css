@@ -2,11 +2,15 @@
 	box-sizing: border-box;
 }
 
+table {
+	table-layout: auto;
+}
+
 .progress-bar {
 	position: relative;
 	width: 200px;
 	height: 1.5em;
-	background-color: grey;
+	background-color: #f7f7f7;
 	border-radius: 1.5em;
 	color: white;
 }
@@ -96,4 +100,20 @@ b.m4 {
 
 b.m1 {
   color: #EF1C24;
+}
+
+b.m2 {
+  color: #009943;
+}
+
+b.m3 {
+  color: #00A9E2;
+}
+
+b.m6 {
+  color: #C9AB78;
+}
+
+b.m11 {
+  color: #AC5391;
 }
