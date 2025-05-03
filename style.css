@@ -1,0 +1,85 @@
+@font-face {
+    font-family: inter;
+    src: url(./assets/Inter.ttf);
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: white #DEDEDE;
+}
+
+body {
+    font-family: inter;
+
+    background-image: url("./assets/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    text-align: center;
+}
+
+div {
+    position: absolute;
+    width: 33vw;
+    background-color: white;
+    border: 3px solid #DEDEDE;
+    text-align: center;
+    margin: auto;
+    padding: 4em 0;
+    border-radius: 1em;
+}
+
+#first {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#second {
+    top: 150%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+p {
+    margin: 0;
+}
+
+.title {
+    margin-bottom: .2em;
+    font-size: 2em;
+    font-weight: 400;
+}
+
+.text {
+    font-size: 1.1em;
+    font-weight: 200;
+    color: #565656;
+}
+
+button {
+    margin-top: 3em;
+    color: white;
+    background-color: #D76363;
+    border: 0;
+    padding: .5em 1em;
+    border-radius: .5em;
+    font-weight: 400;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color:#c95f5f;
+}
+
+button:active {
+    background-color:#bd5555;
+}
+
+a:link, a:visited {
+    color: #565656;
+    text-decoration: none;
+    cursor: pointer;
+}
