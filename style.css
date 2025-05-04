@@ -31,6 +31,12 @@ div {
     border-radius: 1em;
 }
 
+@media (orientation: portrait) {
+    div {
+        width: 80vw;
+    }
+}
+
 #first {
     top: 50%;
     left: 50%;
@@ -44,7 +50,7 @@ div {
 }
 
 p {
-    margin: 0;
+    margin: 0 1em;
 }
 
 .title {
